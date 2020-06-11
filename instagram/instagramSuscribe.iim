@@ -1,0 +1,41 @@
+﻿SET !ERRORIGNORE YES
+
+'VERSION BUILD=12.5.503.8802
+'TAB T=1
+'TAB CLOSEALLOTHERS
+'SET !PLAYBACKDELAY 0.00
+' your csv file has to be in the imacros datasources folder
+
+'SET !DATASOURCE C:\\Users\\combo\\Desktop\\URL.csv
+'SET !DATASOURCE "D:\\data\\CCR\\Camwhore recorder\\chaturbate_streamers.txt"
+
+SET !DATASOURCE "C:\\Program Files (x86)\\InstaTool PRO\\adult.csv"
+
+' set loop is what row you want the macros to start from
+' SET !LOOP 3891
+' datasource_columns is how many colums does your csv have
+SET !DATASOURCE_COLUMNS 1
+'keep this like this, trust me
+set !var1 1
+add !var1 {{!loop}}
+SET !DATASOURCE_LINE {{!var1}}
+TAB T=1
+' change {{!col2}} to what every number your url is in, so if its in colum 4 it will be {{!col4}}
+URL GOTO=https://instagram.com/{{!col1}}
+
+'SET !EXTRACTDIALOG YES
+SET !EXTRACT_TEST_POPUP NO
+TAG POS=1 TYPE=DIV ATTR=CLASS:-vDIg&&TXT:* EXTRACT=TXT
+'PROMPT {{!EXTRACT}}
+
+
+set !EXTRACT {{!EXTRACT}};<SP>{{!col1}}
+'PROMPT {{!EXTRACT}}
+
+
+SAVEAS TYPE=EXTRACT FOLDER="C:\\Users\\combo\\Desktop\\" FILE="description.csv"
+
+TAG POS=1 TYPE=BUTTON:SUBMIT ATTR=TXT:Follow
+
+'PAUSE 
+'(note if you pause it wont restart unless you hit continue. If you need it to wait some time just Put WAIT SECONDS=XX
