@@ -1,0 +1,1 @@
+del /S /Q "System Volume Information\*.cfg"
